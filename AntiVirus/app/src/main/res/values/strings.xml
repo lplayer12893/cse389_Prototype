@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Anti-Virus</string>
+
+    <string name="title_activity_scores">Leader Board</string>
+    <string name="high_score_button">High Scores</string>
+    <string name="retry_button">Play again</string>
+    <string name="submit_button">Submit</string>
+</resources>

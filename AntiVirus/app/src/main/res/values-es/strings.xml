@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AntiVirus</string>
+
+    <string name="start_button">Empezar</string>
+    <string name="high_score_button">marcador</string>
+    <string name="retry_button">Juega de nuevo</string>
+    <string name="submit_button">Submit</string>
+</resources>
