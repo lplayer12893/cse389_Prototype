@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main_activity;
+package com.mnet.antivirus;
 
 /**
  * @author lplayer12893

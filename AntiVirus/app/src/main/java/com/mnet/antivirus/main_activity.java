@@ -7,7 +7,6 @@ import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.Switch;
 
 public class main_activity extends AppCompatActivity {
@@ -62,11 +61,20 @@ public class main_activity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 sound_selector.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                if(isChecked) {
+                if (isChecked) {
                     // TODO: 3/19/16 enabled
-                }else {
+                } else {
                     // TODO: 3/19/16  disabled 
                 }
+            }
+        });
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                Intent AVgame = new Intent(getApplicationContext(), AVgame.class);
+                startActivity(AVgame);
             }
         });
     }

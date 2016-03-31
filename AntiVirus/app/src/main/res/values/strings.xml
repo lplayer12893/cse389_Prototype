@@ -5,4 +5,5 @@
     <string name="high_score_button">High Scores</string>
     <string name="retry_button">Play again</string>
     <string name="submit_button">Submit</string>
+    <string name="title_activity_gameScreen"></string>
 </resources>

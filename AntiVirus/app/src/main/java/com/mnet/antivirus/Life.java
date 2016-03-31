@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main_activity;
+package com.mnet.antivirus;
 
 /**
  * @author Lucas Stuyvesant, Joshua Garcia, Benjamin Morales

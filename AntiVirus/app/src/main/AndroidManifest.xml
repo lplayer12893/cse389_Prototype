@@ -24,6 +24,10 @@
             android:name=".scores"
             android:label="@string/title_activity_scores">
         </activity>
+        <activity
+            android:name=".AVgame"
+            android:label="@string/title_activity_gameScreen">
+        </activity>
     </application>
 
 </manifest>
