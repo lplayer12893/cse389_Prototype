@@ -3,6 +3,9 @@ package com.mnet.antivirus;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +72,7 @@ public class AppIconAdapter extends BaseAdapter {
 
         if (convertView == null) {
             iv = new ImageView(context);
-            iv.setLayoutParams(new GridView.LayoutParams(85, 85));
+            iv.setLayoutParams(new GridView.LayoutParams(150, 150));
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setPadding(8, 8, 8, 8);
         }
@@ -80,11 +83,28 @@ public class AppIconAdapter extends BaseAdapter {
 
         PackageInfo pInfo = (PackageInfo) getItem(position);
         Drawable appIcon = packageManager.getApplicationIcon(pInfo.applicationInfo);
-        appIcon.setBounds(0, 0, 40, 40);
+        Bitmap appMap = drawableToBitmap(appIcon);
 
-        iv.setImageDrawable(appIcon);
+        iv.setImageBitmap(appMap);
         return iv;
     }
 
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+
+        int width = drawable.getIntrinsicWidth();
+        width = width > 0 ? width : 1;
+        int height = drawable.getIntrinsicHeight();
+        height = height > 0 ? height : 1;
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
 }
 

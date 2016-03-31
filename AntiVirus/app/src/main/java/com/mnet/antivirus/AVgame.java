@@ -1,9 +1,11 @@
 package com.mnet.antivirus;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.GridView;
 
@@ -22,9 +24,16 @@ public class AVgame extends Activity {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
 
+        /* gets home screen wallpaper amd sets it as background */
+        final WallpaperManager wallpaper = WallpaperManager.getInstance(this);
+        final Drawable wallD = wallpaper.getFastDrawable();
+
+
         /* sets up the view in a grid */
         setContentView(R.layout.game_layout);
         GridView appGrid = (GridView) findViewById(R.id.appGridView);
+
+        appGrid.setBackground(wallD);
 
         PackageManager pm = getPackageManager();
         allApps = pm.getInstalledPackages(0);
