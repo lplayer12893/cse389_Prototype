@@ -1,12 +1,24 @@
-Due Weds at midnight
-  Lucas - initialize canvas and painter
-  Joshua - get android resources (app bitmaps, android background, etc)
-  Benjamin - finish Life and Virus classes. Work with prototyping application
-  
-Due Thurs at midnight
-  Lucas - redraw
-  Joshua - GameActivity
-  Benjamin - ScoreActivity
-  
 Due Friday
-  everything
+  Lucas - Clock/recurring function logic
+        - Decrement health
+          - if Life is destroyed, eliminate bitmap
+        - Randomly give powerup
+        - Timer score
+        - Actual Seconds of delay
+      
+  Benjamin - finish Life and Virus classes
+        - Add Bitmap field
+        - Implement unimplemented methods
+  Joshua - Powerup Interface, Powerup Classes
+        - Destroyer, Resurrection, Anti-Virus, Empty (action is return)
+        - void action() method
+
+Due Sunday
+  Lucas - initialize canvas and painter
+        - (Josh, List of Life Bitmaps of MAX count)
+        - redraw/animate sprites logic
+  Benjamin - ScoreActivity
+  Joshua - Score and powerup GUI, GameActivity GUI
+
+Due Tuesday April 26
+  everything else
