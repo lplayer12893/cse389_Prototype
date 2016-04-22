@@ -19,6 +19,7 @@ public class AVgame extends Activity {
     List<PackageInfo> allApps;
     List<PackageInfo> noSystemApps;
     AppIconAdapter ap;
+    PowerUp p;
 
     @Override
     public void onCreate(Bundle savedInstance) {
@@ -49,6 +50,9 @@ public class AVgame extends Activity {
         ap = new AppIconAdapter(this, noSystemApps, pm);
         System.out.println("Number of app = " + ap.getCount());
         appGrid.setAdapter(ap);
+
+        p = new ResurrectionPowerUp(noSystemApps, this);
+        p.showIcon();
     }
 
     /**
