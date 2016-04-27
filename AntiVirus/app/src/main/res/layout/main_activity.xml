@@ -42,22 +42,22 @@
         android:layout_alignParentStart="true" />
 
     <Button
+        android:id="@+id/high_score_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/high_score_button"
-        android:id="@+id/high_score_button"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <ImageButton
+        android:id="@+id/help_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/help_button"
         android:background="@drawable/help_button"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/start_button"
-        android:layout_toEndOf="@+id/start_button" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

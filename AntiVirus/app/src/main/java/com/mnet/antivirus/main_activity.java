@@ -7,12 +7,17 @@ import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 
 public class main_activity extends AppCompatActivity {
 
+    static DBAdapter antiDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Artificial Delay
+        //TO BE DELETED
         long total = 4000; // 4 sec.
         long timestampStart = System.currentTimeMillis();
         // TODO: Do extra stuff here
@@ -24,7 +29,11 @@ public class main_activity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //CODE Starts HERE
 
+        //Things to initialize while loading UI
+        openDB();
+        //Main program Starts here
         setTheme(R.style.AppTheme_NoActionBar);
 
         super.onCreate(savedInstanceState);
@@ -33,10 +42,12 @@ public class main_activity extends AppCompatActivity {
         final Button start = (Button)findViewById(R.id.start_button);
         final Button high_score = (Button)findViewById(R.id.high_score_button);
         final Switch sound_selector = (Switch)findViewById(R.id.sound_switch);
+        final ImageButton help = (ImageButton)findViewById(R.id.help_button);
 
         start.setHapticFeedbackEnabled(true);
         high_score.setHapticFeedbackEnabled(true);
         sound_selector.setHapticFeedbackEnabled(true);
+        help.setHapticFeedbackEnabled(true);
 
 
         start.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +68,13 @@ public class main_activity extends AppCompatActivity {
             }
         });
 
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                help.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                //TODO code that calls the help view/activity
+            }
+        });
         sound_selector.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -69,14 +87,11 @@ public class main_activity extends AppCompatActivity {
             }
         });
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Intent AVgame = new Intent(getApplicationContext(), AVgame.class);
-                startActivity(AVgame);
-            }
-        });
+    }
+
+    private  void openDB() {
+        antiDb = new DBAdapter(this);
+        antiDb.open();
     }
 
 }
