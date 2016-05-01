@@ -60,7 +60,7 @@ public class GameView extends SurfaceView {
                 for(int y = (int)Math.ceil(getHeight() / 9.0); y < getHeight(); y += (int)Math.ceil(getHeight() / 9.0)){
                     appIcon = pm.getApplicationIcon(allApps.get(j).applicationInfo);
                     appMap = drawableToBitmap(appIcon);
-                    lives.add(new Life(100, new Coordinate(x,y)));
+                    lives.add(new Life(100, new Coordinate(x,y), appMap));
                 }
             }
         }

@@ -16,12 +16,13 @@ public class Life {
     private Bitmap bmp;
 
     Life() {
-		this(100, new Coordinate());
+		this(100, new Coordinate(), null);
 	}
 	
-	Life(int h, Coordinate c) {
+	Life(int h, Coordinate c, Bitmap b) {
 		health = h;
 		location = c;
+        bmp = b;
 	}
 
 	/**
