@@ -24,12 +24,14 @@ public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<Virus> viruses;
     private List<Life> lives;
-    Bitmap appMap;
+    private Bitmap appMap;
+    private boolean livesDrawn;
 
     public GameView(final Context context) {
         super(context);
         viruses = new ArrayList<Virus>();
         lives = new ArrayList<Life>();
+        livesDrawn = false;
 
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
@@ -113,12 +115,15 @@ public class GameView extends SurfaceView {
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
 
-        for(Virus v : viruses) {
-            v.onDraw(canvas);
+        if(!livesDrawn) {
+            for (Life l : lives) {
+                l.onDraw(canvas);
+            }
+            livesDrawn = true;
         }
 
-        for(Life l : lives){
-            l.onDraw(canvas);
+        for(Virus v : viruses) {
+            v.onDraw(canvas);
         }
     }
 
