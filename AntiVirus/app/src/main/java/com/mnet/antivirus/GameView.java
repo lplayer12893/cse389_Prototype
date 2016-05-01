@@ -3,8 +3,12 @@ package com.mnet.antivirus;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Josh on 4/30/2016.
@@ -12,10 +16,11 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView {
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
-    private Virus v;
+    private List<Virus> viruses;
 
-    public GameView(Context context) {
+    public GameView(final Context context) {
         super(context);
+        viruses = new ArrayList<>();
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -36,6 +41,9 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+                for(int i = 0; i < 10; i++) {
+                    createVirusList();
+                }
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
             }
@@ -46,12 +54,33 @@ public class GameView extends SurfaceView {
             }
         });
 
-        v = new Virus(this, getContext());
+    }
+
+    private void createVirusList() {
+        viruses.add(new Virus(this, getContext()));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
-        v.onDraw(canvas);
+
+        for(Virus v : viruses) {
+            v.onDraw(canvas);
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
+        synchronized (getHolder()) {
+            for(int i = 0; i < viruses.size(); i++) {
+                Virus virus = viruses.get(i);
+                if(virus.isHit(cEvent)) {
+                    viruses.remove(virus);
+                    break;
+                }
+            }
+        }
+        return true;
     }
 }

@@ -10,6 +10,8 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.view.View;
 
+import java.util.Random;
+
 /**
  * @author lplayer12893
  *
@@ -32,16 +34,16 @@ public class Virus {
 
     Virus(GameView gameView, Context context) {
 	//Virus(Coordinate cur, Life tgt, GameView gameView, Context context) {
-		location = new Coordinate(0,0);
-		target = new Life();
         this.gameView = gameView;
         this.ctx = context;
 		
 		/*
 		 * TODO: speed is random, radius is a constant
 		 */
-        
-		xSpeed = 5;
+        Random rnd = new Random();
+        location = new Coordinate();
+		xSpeed = rnd.nextInt(5 * 2) - 5;
+        ySpeed = rnd.nextInt(5 * 2) - 5;
 		damageRate = 1;
 
         bmp = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.basic_virus);
@@ -53,11 +55,10 @@ public class Virus {
 	 * @return true if coordinate c is within the radius of the Virus
 	 */
 	boolean isHit(Coordinate c) {
-		if(location.distance(c) > radius) {
-			return false;
-		}
-		return true;
-	}
+        int x = location.getX();
+        int y = location.getY();
+        return c.getX() > x && c.getX() < x + bmp.getWidth() && c.getY() > y && c.getY() < y + bmp.getHeight();
+    }
 	
 	
 	void damageLife() {
@@ -67,6 +68,10 @@ public class Virus {
 			damageRate = damageRate * 2;
 		}
 	}
+
+    public void setTarget(Life trgt) {
+        this.target = trgt;
+    }
 
     public void scaleBitmap(Bitmap btmp) {
         int width = btmp.getWidth();
@@ -88,17 +93,17 @@ public class Virus {
         int x = location.getX();
         int y = location.getY();
 
-        if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed) {
+        if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
         x = x + xSpeed;
         location.setX(x);
 
-        if(y >= gameView.getHeight() - bmp.getHeight() - ySpeed) {
-            ySpeed = 5;
+        if(y >= gameView.getHeight() - bmp.getHeight() - ySpeed || y + ySpeed <=0) {
+            ySpeed = -ySpeed;
         }
         y = y + ySpeed;
-        location.setX(y);
+        location.setY(y);
     }
 
     public void onDraw(Canvas canvas) {
