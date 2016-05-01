@@ -3,32 +3,50 @@
  */
 package com.mnet.antivirus;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.view.View;
+
 /**
  * @author lplayer12893
  *
  */
 public class Virus {
 
-	private float speed;
+	private int xSpeed;
+    private int ySpeed;
 	private Coordinate location;
 	private Life target;
 	private int radius;
 	private int damageRate;
+    private Context ctx;
+    private Bitmap bmp;
+    private View gameView;
 	
-	Virus() {
-		this(new Coordinate(0,0), null);
-	}
-	
-	Virus(Coordinate cur, Life tgt) {
-		location = cur;
-		target = tgt;
+	/*Virus() {
+        this(new Coordinate(0,0), null, null, null);
+	}*/
+
+    Virus(GameView gameView, Context context) {
+	//Virus(Coordinate cur, Life tgt, GameView gameView, Context context) {
+		location = new Coordinate(0,0);
+		target = new Life();
+        this.gameView = gameView;
+        this.ctx = context;
 		
 		/*
 		 * TODO: speed is random, radius is a constant
 		 */
-		
+        
+		xSpeed = 5;
 		damageRate = 1;
-	}
+
+        bmp = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.basic_virus);
+        scaleBitmap(bmp);
+    }
 	
 	/**
 	 * @param c
@@ -45,8 +63,46 @@ public class Virus {
 	void damageLife() {
 		if(location.distance(target.getLocation()) <= radius) {
 			target.setHealth(target.getHealth() - damageRate);
-			speed = 0;
+			xSpeed = 0;
 			damageRate = damageRate * 2;
 		}
 	}
+
+    public void scaleBitmap(Bitmap btmp) {
+        int width = btmp.getWidth();
+        System.out.println(width);
+        int height = btmp.getHeight();
+        System.out.println("Height = " + height);
+
+        //big virus scale down by 200
+        float scaleWidth = ((float) 150) / width;
+        float scaleHeight = ((float) 150) / height;
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        bmp = Bitmap.createBitmap(btmp, 0, 0, width, height, matrix, false);
+    }
+
+    public void update() {
+        int x = location.getX();
+        int y = location.getY();
+
+        if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed) {
+            xSpeed = -xSpeed;
+        }
+        x = x + xSpeed;
+        location.setX(x);
+
+        if(y >= gameView.getHeight() - bmp.getHeight() - ySpeed) {
+            ySpeed = 5;
+        }
+        y = y + ySpeed;
+        location.setX(y);
+    }
+
+    public void onDraw(Canvas canvas) {
+        update();
+        canvas.drawBitmap(bmp, location.getX(), location.getY(), null);
+    }
 }

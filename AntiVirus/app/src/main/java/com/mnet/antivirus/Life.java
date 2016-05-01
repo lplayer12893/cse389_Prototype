@@ -12,7 +12,7 @@ public class Life {
 	private Coordinate location;
 	
 	Life() {
-		this(0, new Coordinate());
+		this(100, new Coordinate());
 	}
 	
 	Life(int h, Coordinate c) {

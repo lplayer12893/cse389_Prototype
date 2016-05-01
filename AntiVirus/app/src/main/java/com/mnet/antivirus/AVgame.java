@@ -16,22 +16,23 @@ import java.util.List;
  * @author Benjamin Morales, Lucas Stuyvesent, Joshua Garcia.
  */
 public class AVgame extends Activity {
-    List<PackageInfo> allApps;
-    List<PackageInfo> noSystemApps;
-    AppIconAdapter ap;
-    PowerUp p;
+    //List<PackageInfo> allApps;
+    //List<PackageInfo> noSystemApps;
+    //AppIconAdapter ap;
+    //PowerUp p;
 
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        setContentView(new GameView(this));
 
         /* gets home screen wallpaper amd sets it as background */
-        final WallpaperManager wallpaper = WallpaperManager.getInstance(this);
-        final Drawable wallD = wallpaper.getFastDrawable();
+        //final WallpaperManager wallpaper = WallpaperManager.getInstance(this);
+        //final Drawable wallD = wallpaper.getFastDrawable();
 
 
         /* sets up the view in a grid */
-        setContentView(R.layout.game_layout);
+        /*setContentView(R.layout.game_layout);
         GridView appGrid = (GridView) findViewById(R.id.appGridView);
 
         appGrid.setBackground(wallD);
@@ -44,15 +45,15 @@ public class AVgame extends Activity {
             if(!isSystemPackage(p)) {
                 noSystemApps.add(p);
             }
-        }
+        }*/
 
         /* uses view adapter to populate grid view */
-        ap = new AppIconAdapter(this, noSystemApps, pm);
+        /*ap = new AppIconAdapter(this, noSystemApps, pm);
         System.out.println("Number of app = " + ap.getCount());
         appGrid.setAdapter(ap);
 
         p = new ResurrectionPowerUp(noSystemApps, this);
-        p.showIcon();
+        p.showIcon();*/
     }
 
     /**
