@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -30,12 +31,13 @@ public class AVgame extends Activity {
         //final WallpaperManager wallpaper = WallpaperManager.getInstance(this);
         //final Drawable wallD = wallpaper.getFastDrawable();
 
+        //app.setBackground(wallD);
+
 
         /* sets up the view in a grid */
         /*setContentView(R.layout.game_layout);
         GridView appGrid = (GridView) findViewById(R.id.appGridView);
 
-        appGrid.setBackground(wallD);
 
         PackageManager pm = getPackageManager();
         allApps = pm.getInstalledPackages(0);

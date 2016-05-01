@@ -56,7 +56,7 @@ public class AntiVirusPowerUp implements PowerUp {
     @Override
     public void showIcon() {
         image = (ImageView) activity.findViewById(R.id.power_up);
-        image.setImageResource(R.drawable.caps);
+        image.setImageResource(R.drawable.antivirus);
     }
 
     /**

@@ -75,9 +75,7 @@ public class Virus {
 
     public void scaleBitmap(Bitmap btmp) {
         int width = btmp.getWidth();
-        System.out.println(width);
         int height = btmp.getHeight();
-        System.out.println("Height = " + height);
 
         //big virus scale down by 200
         float scaleWidth = ((float) 150) / width;

@@ -24,46 +24,12 @@ public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<Virus> viruses;
     private List<Life> lives;
+    Bitmap appMap;
 
     public GameView(final Context context) {
         super(context);
         viruses = new ArrayList<Virus>();
         lives = new ArrayList<Life>();
-
-        List<PackageInfo> allApps;
-
-        PackageManager pm = context.getPackageManager();
-        allApps = pm.getInstalledPackages(0);
-
-        if(allApps.size() < 32){    // duplicate apps until you have 32
-            for(PackageInfo a : allApps){
-                allApps.add(a);
-                if(allApps.size() == 32){
-                    break;
-                }
-            }
-        }
-
-        Random r = new Random();
-
-        while(allApps.size() > 32){ // delete apps until you have 32
-            allApps.remove(r.nextInt(allApps.size()));
-        }
-
-        Drawable appIcon;
-        Bitmap appMap;
-        double curX = getWidth() / 5;
-        double curY = getHeight() / 9;
-
-        for(int j = 0; j < 32; j++){
-            for(int x = (int)Math.ceil(getWidth() / 5.0); x < getWidth(); x += (int)Math.ceil(getWidth() / 5.0)){
-                for(int y = (int)Math.ceil(getHeight() / 9.0); y < getHeight(); y += (int)Math.ceil(getHeight() / 9.0)){
-                    appIcon = pm.getApplicationIcon(allApps.get(j).applicationInfo);
-                    appMap = drawableToBitmap(appIcon);
-                    lives.add(new Life(100, new Coordinate(x,y), appMap));
-                }
-            }
-        }
 
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
@@ -88,6 +54,8 @@ public class GameView extends SurfaceView {
                 for(int i = 0; i < 10; i++) {
                     createVirusList();
                 }
+                createLifeList();
+
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
             }
@@ -102,6 +70,43 @@ public class GameView extends SurfaceView {
 
     private void createVirusList() {
         viruses.add(new Virus(this, getContext()));
+    }
+
+    private void createLifeList() {
+        List<PackageInfo> allApps;
+
+        PackageManager pm = getContext().getPackageManager();
+        allApps = pm.getInstalledPackages(0);
+
+        if(allApps.size() < 32){    // duplicate apps until you have 32
+            for(PackageInfo a : allApps){
+                allApps.add(a);
+                if(allApps.size() == 32){
+                    break;
+                }
+            }
+        }
+
+        Random r = new Random();
+
+        while(allApps.size() > 32){ // delete apps until you have 32
+            allApps.remove(r.nextInt(allApps.size()));
+        }
+
+        Drawable appIcon;
+        appMap = null;
+        double curX = getWidth() / 5;
+        double curY = getHeight() / 9;
+
+        for(int j = 0; j < 32; j++){
+            for(int x = (int)Math.ceil(getWidth() / 5.0); x < getWidth(); x += (int)Math.ceil(getWidth() / 5.0)){
+                for(int y = (int)Math.ceil(getHeight() / 9.0); y < getHeight(); y += (int)Math.ceil(getHeight() / 9.0)){
+                    appIcon = pm.getApplicationIcon(allApps.get(j).applicationInfo);
+                    appMap = drawableToBitmap(appIcon);
+                    lives.add(new Life(100, new Coordinate(x,y), appMap));
+                }
+            }
+        }
     }
 
     @Override
