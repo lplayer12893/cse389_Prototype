@@ -13,36 +13,66 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/leaderBoard"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/editText" />
+        android:layout_above="@+id/submit" />
 
     <Button
+        android:id="@+id/retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/retry_button"
-        android:id="@+id/retry"
+        android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+
+        android:background="@drawable/button_shape"
+        android:shadowColor="#A8A8A8"
+        android:shadowRadius="5"
+        android:visibility="gone" />
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Name"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_above="@+id/retry"
+        android:hint="@string/hint"
+        android:text="@string/player"
+        android:maxLength="12"
+        android:ems="12"
+        android:layout_alignBottom="@+id/submit"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/retry"
+        android:layout_alignEnd="@+id/retry"
+        android:visibility="gone" />
 
     <Button
+        android:id="@+id/clear"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/abc_ic_clear_material"
+        android:layout_alignBaseline="@id/editText"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/submit"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit_button"
-        android:id="@+id/submit"
+        android:textColor="@android:color/white"
+
+        android:background="@drawable/button_shape"
+        android:shadowColor="#A8A8A8"
+        android:shadowRadius="5"
+        android:layout_marginBottom="21dp"
         android:layout_above="@+id/retry"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -12,27 +12,27 @@ import android.widget.Switch;
 
 public class main_activity extends AppCompatActivity {
 
-    static DBAdapter antiDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Artificial Delay
         //TO BE DELETED
-        long total = 4000; // 4 sec.
-        long timestampStart = System.currentTimeMillis();
+        //long total = 4000; // 4 sec.
+        //long timestampStart = System.currentTimeMillis();
         // TODO: Do extra stuff here
-        long elapsed = System.currentTimeMillis() - timestampStart;
-        long remaining = total - elapsed;
+        //long elapsed = System.currentTimeMillis() - timestampStart;
+        //long remaining = total - elapsed;
 
-        try {
-            Thread.sleep(remaining, 0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    Thread.sleep(remaining, 0);
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
+
         //CODE Starts HERE
 
         //Things to initialize while loading UI
-        openDB();
+
+
         //Main program Starts here
         setTheme(R.style.AppTheme_NoActionBar);
 
@@ -87,11 +87,6 @@ public class main_activity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private  void openDB() {
-        antiDb = new DBAdapter(this);
-        antiDb.open();
     }
 
 }

@@ -22,11 +22,13 @@
         </activity>
         <activity
             android:name=".scores"
-            android:label="@string/title_activity_scores">
+            android:label="@string/title_activity_scores"
+            android:parentActivityName=".main_activity">
         </activity>
         <activity
             android:name=".AVgame"
-            android:label="@string/title_activity_gameScreen">
+            android:label="@string/title_activity_gameScreen"
+            android:parentActivityName=".main_activity">
         </activity>
     </application>
 
