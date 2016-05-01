@@ -113,9 +113,9 @@ public class GameView extends SurfaceView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
 
         if(!livesDrawn) {
+            canvas.drawColor(Color.BLACK);
             for (Life l : lives) {
                 l.onDraw(canvas);
             }
