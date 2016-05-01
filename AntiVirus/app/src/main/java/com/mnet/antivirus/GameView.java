@@ -18,6 +18,8 @@ import java.util.Random;
 
 /**
  * Created by Josh on 4/30/2016.
+ *
+ * @notes http://www.edu4java.com/en/androidgame/androidgame7.html
  */
 public class GameView extends SurfaceView {
     private SurfaceHolder holder;
