@@ -1,14 +1,20 @@
 package com.mnet.antivirus;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Josh on 4/30/2016.
@@ -17,10 +23,48 @@ public class GameView extends SurfaceView {
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
     private List<Virus> viruses;
+    private List<Life> lives;
 
     public GameView(final Context context) {
         super(context);
-        viruses = new ArrayList<>();
+        viruses = new ArrayList<Virus>();
+        lives = new ArrayList<Life>();
+
+        List<PackageInfo> allApps;
+
+        PackageManager pm = context.getPackageManager();
+        allApps = pm.getInstalledPackages(0);
+
+        if(allApps.size() < 32){    // duplicate apps until you have 32
+            for(PackageInfo a : allApps){
+                allApps.add(a);
+                if(allApps.size() == 32){
+                    break;
+                }
+            }
+        }
+
+        Random r = new Random();
+
+        while(allApps.size() > 32){ // delete apps until you have 32
+            allApps.remove(r.nextInt(allApps.size()));
+        }
+
+        Drawable appIcon;
+        Bitmap appMap;
+        double curX = getWidth() / 5;
+        double curY = getHeight() / 9;
+
+        for(int j = 0; j < 32; j++){
+            for(int x = (int)Math.ceil(getWidth() / 5.0); x < getWidth(); x += (int)Math.ceil(getWidth() / 5.0)){
+                for(int y = (int)Math.ceil(getHeight() / 9.0); y < getHeight(); y += (int)Math.ceil(getHeight() / 9.0)){
+                    appIcon = pm.getApplicationIcon(allApps.get(j).applicationInfo);
+                    appMap = drawableToBitmap(appIcon);
+                    lives.add(new Life(100, new Coordinate(x,y)));
+                }
+            }
+        }
+
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -67,6 +111,10 @@ public class GameView extends SurfaceView {
         for(Virus v : viruses) {
             v.onDraw(canvas);
         }
+
+        for(Life l : lives){
+            l.onDraw(canvas);
+        }
     }
 
     @Override
@@ -82,5 +130,23 @@ public class GameView extends SurfaceView {
             }
         }
         return true;
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable)drawable).getBitmap();
+        }
+
+        int width = drawable.getIntrinsicWidth();
+        width = width > 0 ? width : 1;
+        int height = drawable.getIntrinsicHeight();
+        height = height > 0 ? height : 1;
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 }

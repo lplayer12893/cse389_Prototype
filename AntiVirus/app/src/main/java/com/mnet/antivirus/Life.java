@@ -3,6 +3,9 @@
  */
 package com.mnet.antivirus;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+
 /**
  * @author Lucas Stuyvesant, Joshua Garcia, Benjamin Morales
  */
@@ -10,8 +13,9 @@ public class Life {
 
 	private int health;
 	private Coordinate location;
-	
-	Life() {
+    private Bitmap bmp;
+
+    Life() {
 		this(100, new Coordinate());
 	}
 	
@@ -46,5 +50,9 @@ public class Life {
 	 */
 	public void setLocation(Coordinate location) {
 		this.location = location;
+	}
+
+	public void onDraw(Canvas canvas) {
+		canvas.drawBitmap(bmp, location.getX(), location.getY(), null);
 	}
 }
