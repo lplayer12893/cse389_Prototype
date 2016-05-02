@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.support.design.widget.Snackbar;
 import android.view.inputmethod.InputMethodManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 public class scores extends AppCompatActivity {
-
+    //TODO fix bug where listView isn't populated from on first start
     static DBAdapter antiDb;
     Cursor c;
     EditText name;
@@ -31,8 +32,8 @@ public class scores extends AppCompatActivity {
         openDB();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scores);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         populateListView();
         c = antiDb.getMinScore();
@@ -94,7 +95,6 @@ public class scores extends AppCompatActivity {
      */
     private void populateListView() {
         Cursor cursor = antiDb.getAllRows();
-
         if(cursor.getCount() == 0)
             prePopulate();
 
@@ -123,8 +123,10 @@ public class scores extends AppCompatActivity {
             submit.setVisibility(View.GONE);
             clear.setVisibility(View.GONE);
         }
-        else
+        else {
+            Snackbar.make(submit, "To submit your High Score please type in your name", Snackbar.LENGTH_LONG).show();
             return;
+        }
         populateListView();
         closeDB();
     }
@@ -167,6 +169,5 @@ public class scores extends AppCompatActivity {
         for (; i < 10; i++) {
                 antiDb.insertRow(names[i], scores[i]);
         }
-
     }
 }
