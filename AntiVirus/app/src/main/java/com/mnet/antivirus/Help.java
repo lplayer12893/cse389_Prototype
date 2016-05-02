@@ -2,6 +2,7 @@ package com.mnet.antivirus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class Help extends AppCompatActivity {
 
@@ -92,12 +96,26 @@ public class Help extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    PopupWindow popup;
     private void showPopUp() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.about_popup, (ViewGroup)findViewById(R.id.popUpAbout));
-        PopupWindow popup = new PopupWindow(layout, 800, 1000, true);
+        popup = new PopupWindow(layout, 800, WindowManager.LayoutParams.WRAP_CONTENT, true);
         popup.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
+        TextView mini = (TextView)layout.findViewById(R.id.about_title);
+        Typeface customFont = Typeface.createFromAsset(getAssets(),"fonts/divlit.ttf");
+        mini.setTypeface(customFont);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //if(popup.isShowing()) {
+        if(popup != null) {
+            popup.dismiss();
+            popup = null;
+        }
     }
 
     /**
