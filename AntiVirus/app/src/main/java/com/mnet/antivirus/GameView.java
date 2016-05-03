@@ -29,6 +29,7 @@ public class GameView extends SurfaceView {
     private Bitmap appMap;
     private List<PackageInfo> allApps;
     private PackageManager pm;
+    private long click;
 
     public GameView(final Context context) {
         super(context);
@@ -127,21 +128,24 @@ public class GameView extends SurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
-        synchronized (getHolder()) {
-            boolean hitVirus = false;
-            for(Virus virus : viruses) {
-                if(virus.isHit(cEvent)) {
-                    viruses.remove(virus);
-                    hitVirus = true;
-                    break;
-                }
-            }
-            if(!hitVirus){
-                for(Life life : lives){
-                    if(life.isHit(cEvent)){
-                        lives.remove(life);
+        if(System.currentTimeMillis() - click > 500) {
+            click = System.currentTimeMillis();
+            Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
+            synchronized (getHolder()) {
+                boolean hitVirus = false;
+                for (Virus virus : viruses) {
+                    if (virus.isHit(cEvent)) {
+                        viruses.remove(virus);
+                        hitVirus = true;
                         break;
+                    }
+                }
+                if (!hitVirus) {
+                    for (Life life : lives) {
+                        if (life.isHit(cEvent)) {
+                            lives.remove(life);
+                            break;
+                        }
                     }
                 }
             }
