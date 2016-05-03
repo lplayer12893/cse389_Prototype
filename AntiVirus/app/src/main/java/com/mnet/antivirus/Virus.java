@@ -21,6 +21,8 @@ public class Virus {
 	private int xSpeed;
     private int ySpeed;
     private double speedRatio;
+    private int maxSpeed = 10;
+    private int minSpeed = 5;
 	private Coordinate location;
 	private Life target;
 	private int radius;
@@ -43,7 +45,7 @@ public class Virus {
 		 */
         Random rnd = new Random();
         location = new Coordinate();
-		xSpeed = rnd.nextInt(10 * 2) - 10;
+		xSpeed = rnd.nextInt((maxSpeed - minSpeed) + maxSpeed);
         ySpeed = (int)(xSpeed * speedRatio);
 		damageRate = 1;
 
