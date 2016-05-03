@@ -52,7 +52,7 @@
         android:id="@+id/clear"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/abc_ic_clear_material"
+        android:background="@android:drawable/ic_input_delete"
         android:layout_alignBaseline="@id/editText"
         android:layout_alignRight="@+id/editText"
         android:layout_alignEnd="@+id/editText"

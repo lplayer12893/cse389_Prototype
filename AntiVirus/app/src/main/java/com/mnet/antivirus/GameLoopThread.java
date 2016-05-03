@@ -1,5 +1,6 @@
 package com.mnet.antivirus;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 
 /**
@@ -28,19 +29,28 @@ public class GameLoopThread extends Thread {
             try {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
-                    if(c != null) {
+                    if (c != null) {
                         view.onDraw(c);
                     }
-                    if(downIters == 0 && spawnDelay > 100){
-                        spawnDelay -= 50;
-                        downIters = spawnDelay / 100;
-                        view.createVirus();
+                    if (view.lives.isEmpty()) {
+                        view.viruses.clear();
+                        Intent scores = new Intent(view.ctx, scores.class);
+                        scores.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view.ctx.startActivity(scores);
+                        running = false;
+                        break;
                     }
-                    else if(downIters != 0){
-                        downIters--;
+                    else {
+                        if (downIters == 0 && spawnDelay > 100) {
+                            spawnDelay -= 50;
+                            downIters = spawnDelay / 100;
+                            view.createVirus();
+                        } else if (downIters != 0) {
+                            downIters--;
+                        }
+                        view.checkLife();
+                        view.removeDead();
                     }
-                    view.checkLife();
-                    view.removeDead();
                 }
             } finally {
                 if (c != null) {

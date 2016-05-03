@@ -1,6 +1,7 @@
 package com.mnet.antivirus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -24,16 +25,18 @@ import java.util.Random;
 public class GameView extends SurfaceView {
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
-    private List<Virus> viruses;
-    private List<Life> lives;
+    protected List<Virus> viruses;
+    protected List<Life> lives;
     private List<Life> dead;
     private Bitmap appMap;
     private List<PackageInfo> allApps;
     private PackageManager pm;
     private long click;
+    protected Context ctx;
 
     public GameView(final Context context) {
         super(context);
+        ctx = context;
         viruses = new ArrayList<Virus>();
         lives = new ArrayList<Life>();
         dead = new ArrayList<Life>();
