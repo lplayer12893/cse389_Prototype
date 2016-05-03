@@ -106,6 +106,8 @@ public class Virus {
         double x = location.getX();
         double y = location.getY();
 
+        damageLife();
+        
         if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
