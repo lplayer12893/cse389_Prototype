@@ -33,12 +33,11 @@ public class GameLoopThread extends Thread {
                         view.onDraw(c);
                     }
                     if (view.lives.isEmpty()) {
+                        running = false;
                         view.viruses.clear();
                         Intent scores = new Intent(view.ctx, scores.class);
                         scores.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         view.ctx.startActivity(scores);
-                        running = false;
-                        break;
                     }
                     else {
                         if (downIters == 0 && spawnDelay > 100) {

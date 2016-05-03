@@ -57,6 +57,7 @@ public class GameView extends SurfaceView {
 
                     }
                 }
+
             }
 
             @Override
@@ -64,8 +65,10 @@ public class GameView extends SurfaceView {
 
                 createLifeList();
 
-                gameLoopThread.setRunning(true);
-                gameLoopThread.start();
+                if(gameLoopThread.getState() == Thread.State.NEW) {
+                    gameLoopThread.setRunning(true);
+                    gameLoopThread.start();
+                }
             }
 
             @Override
