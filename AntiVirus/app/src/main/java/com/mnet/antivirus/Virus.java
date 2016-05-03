@@ -44,6 +44,8 @@ public class Virus {
 		 * TODO: speed is random, radius is a constant
 		 */
         location = new Coordinate();
+        xSpeed = 0;
+        ySpeed = 0;
 		damageRate = 1;
 
         bmp = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.basic_virus);
@@ -70,21 +72,35 @@ public class Virus {
 		}
 	}
 
+    public Life getTarget() {
+        return target;
+    }
+
     public void setTarget(Life trgt) {
         this.target = trgt;
         Random rnd = new Random();
 
         Coordinate loc = target.getLocation();
-        speedRatio = (double) loc.getY() / (double) loc.getX();
+
+        int xSign = 1;
+        int ySign = 1;
+        speedRatio = (double) (loc.getY() - location.getY()) / (double) (loc.getX() - location.getX());
+
+        if(loc.getX() < location.getX()){
+            xSign = -1;
+        }
+        if(loc.getY() < location.getY()){
+            ySign = -1;
+        }
 
         if(loc.getX() > loc.getY()) {
-            ySpeed = rnd.nextDouble() * (maxSpeed * speedRatio - minSpeed * speedRatio) + minSpeed * speedRatio;
-            xSpeed = (ySpeed / speedRatio);
+            ySpeed = ySign * rnd.nextDouble() * Math.abs((maxSpeed * speedRatio - minSpeed * speedRatio) + minSpeed * speedRatio);
+            xSpeed = xSign * Math.abs(ySpeed / speedRatio);
         }
 
         else {
-            xSpeed = rnd.nextDouble() * (maxSpeed / speedRatio - minSpeed / speedRatio) + minSpeed / speedRatio;
-            ySpeed = (xSpeed * speedRatio);
+            xSpeed = xSign * rnd.nextDouble() * Math.abs((maxSpeed / speedRatio - minSpeed / speedRatio) + minSpeed / speedRatio);
+            ySpeed = ySign * Math.abs(xSpeed * speedRatio);
         }
     }
 
@@ -107,7 +123,7 @@ public class Virus {
         double y = location.getY();
 
         damageLife();
-        
+
         if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
