@@ -179,7 +179,7 @@ public class GameView extends SurfaceView {
     public void checkLife() {
         synchronized (lives) {
             for (Life life : lives) {
-                if (life.getHealth() == 0) {
+                if (life.getHealth() <= 0) {
                     dead.add(life);
                 }
             }

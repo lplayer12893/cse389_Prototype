@@ -69,7 +69,7 @@ public class Virus {
 			target.setHealth(target.getHealth() - damageRate);
 			xSpeed = 0;
             ySpeed = 0;
-			damageRate = damageRate * 2;
+			//damageRate = damageRate * 2;
 		}
 	}
 
