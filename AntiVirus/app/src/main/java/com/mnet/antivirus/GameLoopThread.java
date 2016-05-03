@@ -40,6 +40,7 @@ public class GameLoopThread extends Thread {
                         downIters--;
                     }
                     view.checkLife();
+                    view.removeDead();
                 }
             } finally {
                 if (c != null) {
