@@ -7,8 +7,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -32,6 +34,9 @@ public class GameView extends SurfaceView {
     private List<PackageInfo> allApps;
     private PackageManager pm;
     private long click;
+    private int score = 0;
+    private Paint paint = new Paint();
+    private Handler handler = new Handler();
     protected Context ctx;
 
     public GameView(final Context context) {
@@ -62,6 +67,18 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+
+
+                Runnable task = new Runnable() {
+                    @Override
+                    public void run() {
+                        score = score + 1;
+                        handler.postDelayed(this, 500);
+                    }
+                };
+                handler.removeCallbacks(task);
+                handler.post(task);
+
 
                 createLifeList();
 
@@ -126,6 +143,9 @@ public class GameView extends SurfaceView {
 
         canvas.drawColor(Color.BLACK);
 
+        paint.setColor(Color.argb(255, 255, 255, 255));
+        paint.setTextSize(60);
+        canvas.drawText("Score: " + score, 10, 50, paint);
         for (Life l : lives) {
             l.onDraw(canvas);
         }
