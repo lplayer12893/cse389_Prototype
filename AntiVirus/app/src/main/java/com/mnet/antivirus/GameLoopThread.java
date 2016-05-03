@@ -24,21 +24,17 @@ public class GameLoopThread extends Thread {
     @Override
     public void run() {
         while (running) {
-
-
-
             Canvas c = null;
             try {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
                     view.onDraw(c);
                     if(downIters == 0 && spawnDelay > 100){
-                        spawnDelay -= 100;
+                        spawnDelay -= 50;
                         downIters = spawnDelay / 100;
                         view.createVirusList();
-                        System.out.println("adding virus....");
                     }
-                    else{
+                    else if(downIters != 0){
                         downIters--;
                     }
                 }
