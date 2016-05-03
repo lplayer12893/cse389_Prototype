@@ -28,8 +28,9 @@ public class GameLoopThread extends Thread {
             try {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
-                    if(c != null)
+                    if(c != null) {
                         view.onDraw(c);
+                    }
                     if(downIters == 0 && spawnDelay > 100){
                         spawnDelay -= 50;
                         downIters = spawnDelay / 100;
@@ -38,6 +39,7 @@ public class GameLoopThread extends Thread {
                     else if(downIters != 0){
                         downIters--;
                     }
+                    //view.checkLife();
                 }
             } finally {
                 if (c != null) {

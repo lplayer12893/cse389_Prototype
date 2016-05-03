@@ -175,10 +175,12 @@ public class GameView extends SurfaceView {
     }
 
     public void checkLife() {
-        for(Life life : lives) {
-            if(life.getHealth() == 0) {
-                lives.remove(life);
-                dead.add(life);
+        synchronized (lives) {
+            for (Life life : lives) {
+                if (life.getHealth() == 0) {
+                    lives.remove(life);
+                    dead.add(life);
+                }
             }
         }
     }
