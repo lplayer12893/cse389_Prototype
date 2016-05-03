@@ -21,8 +21,8 @@ public class Virus {
 	private double xSpeed;
     private double ySpeed;
     private double speedRatio;
-    private double maxSpeed = 10;
-    private double minSpeed = 7;
+    private double maxSpeed = 13;
+    private double minSpeed = 10;
 	private Coordinate location;
 	private Life target;
 	private int radius;
