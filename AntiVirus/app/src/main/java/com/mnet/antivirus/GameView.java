@@ -53,10 +53,10 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                for(int i = 0; i < 10; i++) {
+                /*for(int i = 0; i < 10; i++) {
                     createVirusList();
                 }
-                createLifeList();
+                createLifeList();*/
 
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
@@ -67,7 +67,10 @@ public class GameView extends SurfaceView {
                                        int width, int height) {
             }
         });
-
+        for(int i = 0; i < 10; i++) {
+            createVirusList();
+        }
+        createLifeList();
     }
 
     private void createVirusList() {
