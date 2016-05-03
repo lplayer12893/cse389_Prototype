@@ -128,11 +128,21 @@ public class GameView extends SurfaceView {
     public boolean onTouchEvent(MotionEvent event) {
         Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
         synchronized (getHolder()) {
+            boolean hitVirus = false;
             for(int i = 0; i < viruses.size(); i++) {
                 Virus virus = viruses.get(i);
                 if(virus.isHit(cEvent)) {
                     viruses.remove(virus);
+                    hitVirus = true;
                     break;
+                }
+            }
+            if(!hitVirus){
+                for(Life life : lives){
+                    if(life.isHit(cEvent)){
+                        lives.remove(life);
+                        break;
+                    }
                 }
             }
         }
