@@ -177,24 +177,19 @@ public class GameView extends SurfaceView {
     }
 
     public void checkLife() {
-        //List<Life> l = getLivesList();
         synchronized (lives) {
             for (Life life : lives) {
                 if (life.getHealth() == 0) {
                     dead.add(life);
-                    invalidate();
                 }
             }
         }
     }
 
-    public synchronized List<Life> getLivesList() {
-        return lives;
-    }
-
     public void removeDead() {
         synchronized (dead) {
             lives.removeAll(dead);
+            dead.clear();
         }
     }
 }
