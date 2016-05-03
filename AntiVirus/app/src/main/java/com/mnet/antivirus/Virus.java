@@ -42,8 +42,8 @@ public class Virus {
 		 */
         Random rnd = new Random();
         location = new Coordinate();
-		xSpeed = rnd.nextInt(5 * 2) - 5;
-        ySpeed = rnd.nextInt(5 * 2) - 5;
+		xSpeed = rnd.nextInt(10 * 2) - 10;
+        ySpeed = rnd.nextInt(10 * 2) - 10;
 		damageRate = 1;
 
         bmp = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.basic_virus);
