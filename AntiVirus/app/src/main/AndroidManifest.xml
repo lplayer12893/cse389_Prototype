@@ -32,6 +32,7 @@
         <activity
             android:name=".AVgame"
             android:label="@string/title_activity_gameScreen"
+            android:screenOrientation="portrait"
             android:parentActivityName=".main_activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

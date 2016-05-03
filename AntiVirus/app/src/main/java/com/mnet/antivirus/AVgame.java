@@ -58,6 +58,12 @@ public class AVgame extends Activity {
         p.showIcon();*/
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
+
     /**
      * Checks whether app is a SYSTEM installed app
      * @param pkgInfo the information of the package
