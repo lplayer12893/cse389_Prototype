@@ -65,6 +65,7 @@ public class Virus {
 		if(location.distance(target.getLocation()) <= radius) {
 			target.setHealth(target.getHealth() - damageRate);
 			xSpeed = 0;
+            ySpeed = 0;
 			damageRate = damageRate * 2;
 		}
 	}
@@ -102,27 +103,20 @@ public class Virus {
     }
 
     public void update() {
-        int x = location.getX();
-        int y = location.getY();
-        int tx = target.getLocation().getX();
-        int ty = target.getLocation().getY();
-
-        if(x == tx && y == ty){
-            xSpeed = 0;
-            ySpeed = 0;
-        }
+        double x = location.getX();
+        double y = location.getY();
 
         if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
-        x = x + (int) xSpeed;
-        location.setX(x);
+        x = x + xSpeed;
+        location.setX((int)x);
 
         if(y >= gameView.getHeight() - bmp.getHeight() - ySpeed || y + ySpeed <=0) {
             ySpeed = -ySpeed;
         }
-        y = y + (int) ySpeed;
-        location.setY(y);
+        y = y + ySpeed;
+        location.setY((int)y);
     }
 
     public void onDraw(Canvas canvas) {
