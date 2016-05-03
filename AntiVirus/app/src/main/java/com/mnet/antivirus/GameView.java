@@ -131,7 +131,7 @@ public class GameView extends SurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(System.currentTimeMillis() - click > 300) {
+        if(System.currentTimeMillis() - click > 100) {
             click = System.currentTimeMillis();
             Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
             synchronized (getHolder()) {
