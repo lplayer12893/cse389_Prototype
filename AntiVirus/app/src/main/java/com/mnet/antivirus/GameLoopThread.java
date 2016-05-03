@@ -32,7 +32,7 @@ public class GameLoopThread extends Thread {
                     if(downIters == 0 && spawnDelay > 100){
                         spawnDelay -= 50;
                         downIters = spawnDelay / 100;
-                        view.createVirusList();
+                        view.createVirus();
                     }
                     else if(downIters != 0){
                         downIters--;

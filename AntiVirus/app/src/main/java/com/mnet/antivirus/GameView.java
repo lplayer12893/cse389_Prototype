@@ -56,11 +56,6 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                /*for(int i = 0; i < 10; i++) {
-                    createVirusList();
-                }*/
-
-
 
                 createLifeList();
 
@@ -78,8 +73,11 @@ public class GameView extends SurfaceView {
         }*/
     }
 
-    public void createVirusList() {
-        viruses.add(new Virus(this, getContext()));
+    public void createVirus() {
+        Virus v = new Virus(this, getContext());
+        Random r = new Random();
+        v.setTarget(lives.get(r.nextInt(lives.size())));
+        viruses.add(v);
     }
 
     public void createLifeList() {
