@@ -100,13 +100,12 @@ public class GameView extends SurfaceView {
         double curX = getWidth() / 5;
         double curY = getHeight() / 9;
 
-        for(int j = 0; j < 32; j++){
-            for(int x = ((int)Math.ceil(getWidth() / 5.0)) - 75; x + 75 < getWidth(); x += (int)Math.ceil(getWidth() / 5.0)){
-                for(int y = ((int)Math.ceil(getHeight() / 9.0)) - 75; y + 75 < getHeight(); y += (int)Math.ceil(getHeight() / 9.0)){
-                    appIcon = pm.getApplicationIcon(allApps.get(j).applicationInfo);
-                    appMap = drawableToBitmap(appIcon);
-                    lives.add(new Life(100, new Coordinate(x,y), appMap));
-                }
+        int j = 0;
+        for(int x = ((int)Math.ceil(getWidth() / 5.0)) - 75; x + 75 < getWidth(); x += (int)Math.ceil(getWidth() / 5.0)){
+            for(int y = ((int)Math.ceil(getHeight() / 9.0)) - 75; y + 75 < getHeight(); y += (int)Math.ceil(getHeight() / 9.0), j++){
+                appIcon = pm.getApplicationIcon(allApps.get(j).applicationInfo);
+                appMap = drawableToBitmap(appIcon);
+                lives.add(new Life(100, new Coordinate(x,y), appMap));
             }
         }
     }
