@@ -26,6 +26,7 @@ public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<Virus> viruses;
     private List<Life> lives;
+    private List<Life> dead;
     private Bitmap appMap;
     private List<PackageInfo> allApps;
     private PackageManager pm;
@@ -35,6 +36,7 @@ public class GameView extends SurfaceView {
         super(context);
         viruses = new ArrayList<Virus>();
         lives = new ArrayList<Life>();
+        dead = new ArrayList<Life>();
 
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
@@ -144,7 +146,7 @@ public class GameView extends SurfaceView {
                 if (!hitVirus) {
                     for (Life life : lives) {
                         if (life.isHit(cEvent)) {
-                            lives.remove(life);
+                            life.setHealth(0);
                             break;
                         }
                     }
@@ -170,5 +172,14 @@ public class GameView extends SurfaceView {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    public void checkLife() {
+        for(Life life : lives) {
+            if(life.getHealth() == 0) {
+                lives.remove(life);
+                dead.add(life);
+            }
+        }
     }
 }

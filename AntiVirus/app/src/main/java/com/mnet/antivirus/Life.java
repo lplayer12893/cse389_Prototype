@@ -15,6 +15,7 @@ public class Life {
     private int health;
     private Coordinate location;
     private Bitmap bmp;
+    private boolean dead;
 
     Life() {
         this(100, new Coordinate(), null);

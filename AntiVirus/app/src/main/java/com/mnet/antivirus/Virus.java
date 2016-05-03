@@ -39,6 +39,7 @@ public class Virus {
 	//Virus(Coordinate cur, Life tgt, GameView gameView, Context context) {
         this.gameView = gameView;
         this.ctx = context;
+        this.radius = 75;
 		
 		/*
 		 * TODO: speed is random, radius is a constant
