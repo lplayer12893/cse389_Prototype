@@ -131,6 +131,7 @@ public class GameView extends SurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        List<Life> l = getLivesList();
         if(System.currentTimeMillis() - click > 100) {
             click = System.currentTimeMillis();
             Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
@@ -144,9 +145,10 @@ public class GameView extends SurfaceView {
                     }
                 }
                 if (!hitVirus) {
-                    for (Life life : lives) {
+                    for (Life life : l) {
                         if (life.isHit(cEvent)) {
-                            life.setHealth(0);
+                            l.remove(life);
+                            dead.add(life);
                             break;
                         }
                     }
@@ -175,13 +177,17 @@ public class GameView extends SurfaceView {
     }
 
     public void checkLife() {
-        synchronized (lives) {
-            for (Life life : lives) {
-                if (life.getHealth() == 0) {
-                    lives.remove(life);
-                    dead.add(life);
-                }
+        List<Life> l = getLivesList();
+        for (Life life : l) {
+            if (life.getHealth() == 0) {
+                l.remove(life);
+                dead.add(life);
+                invalidate();
             }
         }
+    }
+
+    public synchronized List<Life> getLivesList() {
+        return lives;
     }
 }

@@ -79,6 +79,6 @@ public class Life {
     }
 
 	public void onDraw(Canvas canvas) {
-		canvas.drawBitmap(bmp, (int)location.getX(), (int)location.getY(), null);
+        canvas.drawBitmap(bmp, (int) location.getX(), (int) location.getY(), null);
 	}
 }
