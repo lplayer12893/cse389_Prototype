@@ -8,14 +8,14 @@ package com.mnet.antivirus;
  */
 public class Coordinate {
 
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	
 	Coordinate() {
 		this(0,0);
 	}
 	
-	Coordinate(int xx, int yy) {
+	Coordinate(double xx, double yy) {
 		x = xx;
 		y = yy;
 	}
@@ -23,29 +23,29 @@ public class Coordinate {
 	/**
 	 * @return the x
 	 */
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 	/**
 	 * @param x the x to set
 	 */
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 	/**
 	 * @return the y
 	 */
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 	/**
 	 * @param y the y to set
 	 */
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 
-	public int distance(Coordinate b) {
-		return (int)Math.ceil(Math.sqrt((x-b.getX()) * (x-b.getX()) + (y-b.getY()) * (y-b.getY())));
+	public double distance(Coordinate b) {
+		return (double)Math.ceil(Math.sqrt((x-b.getX()) * (x-b.getX()) + (y-b.getY()) * (y-b.getY())));
 	}
 }

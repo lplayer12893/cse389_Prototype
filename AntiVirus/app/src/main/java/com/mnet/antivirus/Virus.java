@@ -55,8 +55,8 @@ public class Virus {
 	 * @return true if coordinate c is within the radius of the Virus
 	 */
 	boolean isHit(Coordinate c) {
-        int x = location.getX();
-        int y = location.getY();
+        double x = location.getX();
+        double y = location.getY();
         return c.getX() > x && c.getX() < x + bmp.getWidth() && c.getY() > y && c.getY() < y + bmp.getHeight();
     }
 	
@@ -110,17 +110,17 @@ public class Virus {
             xSpeed = -xSpeed;
         }
         x = x + xSpeed;
-        location.setX((int)x);
+        location.setX(x);
 
         if(y >= gameView.getHeight() - bmp.getHeight() - ySpeed || y + ySpeed <=0) {
             ySpeed = -ySpeed;
         }
         y = y + ySpeed;
-        location.setY((int)y);
+        location.setY(y);
     }
 
     public void onDraw(Canvas canvas) {
         update();
-        canvas.drawBitmap(bmp, location.getX(), location.getY(), null);
+        canvas.drawBitmap(bmp, (int)location.getX(), (int)location.getY(), null);
     }
 }

@@ -59,8 +59,8 @@ public class Life {
      * @return true if coordinate c is within the radius of the Virus
      */
     public boolean isHit(Coordinate c) {
-        int x = location.getX();
-        int y = location.getY();
+        double x = location.getX();
+        double y = location.getY();
         return c.getX() > x && c.getX() < x+bmp.getWidth() && c.getY() > y && c.getY() < y+bmp.getHeight();
     }
 
@@ -78,6 +78,6 @@ public class Life {
     }
 
 	public void onDraw(Canvas canvas) {
-		canvas.drawBitmap(bmp, location.getX(), location.getY(), null);
+		canvas.drawBitmap(bmp, (int)location.getX(), (int)location.getY(), null);
 	}
 }
