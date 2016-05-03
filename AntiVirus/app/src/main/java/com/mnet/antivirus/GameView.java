@@ -73,16 +73,16 @@ public class GameView extends SurfaceView {
                                        int width, int height) {
             }
         });
-        for(int i = 0; i < 10; i++) {
+        /*for(int i = 0; i < 10; i++) {
             createVirusList();
-        }
+        }*/
     }
 
-    private void createVirusList() {
+    public void createVirusList() {
         viruses.add(new Virus(this, getContext()));
     }
 
-    private void createLifeList() {
+    public void createLifeList() {
 
         pm = getContext().getPackageManager();
         allApps = pm.getInstalledPackages(0);
@@ -101,7 +101,7 @@ public class GameView extends SurfaceView {
         while(allApps.size() > 32){ // delete apps until you have 32
             allApps.remove(r.nextInt(allApps.size()));
         }
-        
+
         Drawable appIcon;
         appMap = null;
 

@@ -7,10 +7,14 @@ import android.graphics.Canvas;
  */
 public class GameLoopThread extends Thread {
     private GameView view;
-    private boolean running = false;
+    private boolean running;
+    private long spawnDelay;
+    private int downIters;
 
     public GameLoopThread(GameView view) {
         this.view = view;
+        spawnDelay = 5000;
+        downIters = 100000;
     }
 
     public void setRunning(boolean run) {
@@ -20,6 +24,15 @@ public class GameLoopThread extends Thread {
     @Override
     public void run() {
         while (running) {
+            if(downIters == 0 && spawnDelay > 100){
+                spawnDelay -= 100;
+                downIters = 100000;
+                view.createVirusList();
+            }
+            else{
+                downIters--;
+            }
+
             Canvas c = null;
             try {
                 c = view.getHolder().lockCanvas();
