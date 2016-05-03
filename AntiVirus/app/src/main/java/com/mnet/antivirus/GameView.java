@@ -27,6 +27,8 @@ public class GameView extends SurfaceView {
     private List<Virus> viruses;
     private List<Life> lives;
     private Bitmap appMap;
+    private List<PackageInfo> allApps;
+    private PackageManager pm;
 
     public GameView(final Context context) {
         super(context);
@@ -57,6 +59,23 @@ public class GameView extends SurfaceView {
                     createVirusList();
                 }
                 createLifeList();*/
+                pm = getContext().getPackageManager();
+                allApps = pm.getInstalledPackages(0);
+
+                if(allApps.size() < 32){    // duplicate apps until you have 32
+                    for(PackageInfo a : allApps){
+                        allApps.add(a);
+                        if(allApps.size() == 32){
+                            break;
+                        }
+                    }
+                }
+
+                Random r = new Random();
+
+                while(allApps.size() > 32){ // delete apps until you have 32
+                    allApps.remove(r.nextInt(allApps.size()));
+                }
 
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
@@ -78,30 +97,9 @@ public class GameView extends SurfaceView {
     }
 
     private void createLifeList() {
-        List<PackageInfo> allApps;
-
-        PackageManager pm = getContext().getPackageManager();
-        allApps = pm.getInstalledPackages(0);
-
-        if(allApps.size() < 32){    // duplicate apps until you have 32
-            for(PackageInfo a : allApps){
-                allApps.add(a);
-                if(allApps.size() == 32){
-                    break;
-                }
-            }
-        }
-
-        Random r = new Random();
-
-        while(allApps.size() > 32){ // delete apps until you have 32
-            allApps.remove(r.nextInt(allApps.size()));
-        }
 
         Drawable appIcon;
         appMap = null;
-        double curX = getWidth() / 5;
-        double curY = getHeight() / 9;
 
         int j = 0;
         for(int x = ((int)Math.ceil(getWidth() / 5.0)) - 75; x + 75 < getWidth(); x += (int)Math.ceil(getWidth() / 5.0)){
