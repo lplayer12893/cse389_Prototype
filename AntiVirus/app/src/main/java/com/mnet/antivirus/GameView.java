@@ -129,8 +129,7 @@ public class GameView extends SurfaceView {
         Coordinate cEvent = new Coordinate((int) event.getX(), (int) event.getY());
         synchronized (getHolder()) {
             boolean hitVirus = false;
-            for(int i = 0; i < viruses.size(); i++) {
-                Virus virus = viruses.get(i);
+            for(Virus virus : viruses) {
                 if(virus.isHit(cEvent)) {
                     viruses.remove(virus);
                     hitVirus = true;
