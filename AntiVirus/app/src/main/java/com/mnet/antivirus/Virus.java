@@ -18,11 +18,11 @@ import java.util.Random;
  */
 public class Virus {
 
-	private int xSpeed;
-    private int ySpeed;
+	private double xSpeed;
+    private double ySpeed;
     private double speedRatio;
-    private int maxSpeed = 10;
-    private int minSpeed = 5;
+    private double maxSpeed = 7;
+    private double minSpeed = 5;
 	private Coordinate location;
 	private Life target;
 	private int radius;
@@ -43,10 +43,7 @@ public class Virus {
 		/*
 		 * TODO: speed is random, radius is a constant
 		 */
-        Random rnd = new Random();
         location = new Coordinate();
-		xSpeed = rnd.nextInt((maxSpeed - minSpeed) + maxSpeed);
-        ySpeed = (int)(xSpeed * speedRatio);
 		damageRate = 1;
 
         bmp = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.basic_virus);
@@ -74,8 +71,20 @@ public class Virus {
 
     public void setTarget(Life trgt) {
         this.target = trgt;
+        Random rnd = new Random();
+
         Coordinate loc = target.getLocation();
-        speedRatio = loc.getY() / loc.getX();
+        speedRatio = (double) loc.getY() / (double) loc.getX();
+
+        if(loc.getX() > loc.getY()) {
+            ySpeed = rnd.nextDouble() * (maxSpeed * speedRatio - minSpeed * speedRatio) + minSpeed * speedRatio;
+            xSpeed = (ySpeed / speedRatio);
+        }
+
+        else {
+            xSpeed = rnd.nextDouble() * (maxSpeed / speedRatio - minSpeed / speedRatio) + minSpeed / speedRatio;
+            ySpeed = (xSpeed * speedRatio);
+        }
     }
 
     public void scaleBitmap(Bitmap btmp) {
@@ -106,13 +115,13 @@ public class Virus {
         if(x >= gameView.getWidth() - bmp.getWidth() - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
-        x = x + xSpeed;
+        x = x + (int) xSpeed;
         location.setX(x);
 
         if(y >= gameView.getHeight() - bmp.getHeight() - ySpeed || y + ySpeed <=0) {
             ySpeed = -ySpeed;
         }
-        y = y + ySpeed;
+        y = y + (int) ySpeed;
         location.setY(y);
     }
 
