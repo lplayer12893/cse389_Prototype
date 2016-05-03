@@ -67,23 +67,20 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
 
-
-
-
-
                 createLifeList();
+                Runnable task = new Runnable() {
+                    @Override
+                    public void run() {
+                        scores.score = scores.score + 1;
+                        handler.postDelayed(this, 500);
+                    }
+                };
 
                 if(gameLoopThread.getState() == Thread.State.NEW) {
                     gameLoopThread.setRunning(true);
                     gameLoopThread.start();
+                    scores.score = -1;
 
-                    Runnable task = new Runnable() {
-                        @Override
-                        public void run() {
-                            scores.score = scores.score + 1;
-                            handler.postDelayed(this, 500);
-                        }
-                    };
                     handler.removeCallbacks(task);
                     handler.post(task);
 
