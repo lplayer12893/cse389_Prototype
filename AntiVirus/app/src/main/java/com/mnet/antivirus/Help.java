@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +56,7 @@ public class Help extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Intent i = new Intent(getApplicationContext(), AVgame.class);
                 startActivity(i);
             }
@@ -118,20 +120,6 @@ public class Help extends AppCompatActivity {
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class helpFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_help, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format));
-            return rootView;
-        }
-    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -146,13 +134,25 @@ public class Help extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return new helpFragment();
+            switch (position) {
+                case 0:
+                    return new help_fragments.helpFragment();
+                case 1:
+                    return new help_fragments.helpFragmentOne();
+                case 2:
+                    return new help_fragments.helpFragmentTwo();
+                case 3:
+                    return new help_fragments.helpFragmentThree();
+                case 4:
+                    return new help_fragments.helpFragmentFour();
+                default:
+                    return new help_fragments.helpFragment();
+            }
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // total pages.
             return NUM_PAGES;
         }
 
@@ -165,6 +165,10 @@ public class Help extends AppCompatActivity {
                     return "SECTION 2";
                 case 2:
                     return "SECTION 3";
+                case 3:
+                    return "SECTION 4";
+                case 4:
+                    return "SECTION 5";
             }
             return null;
         }

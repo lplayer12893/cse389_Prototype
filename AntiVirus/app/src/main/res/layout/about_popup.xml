@@ -28,9 +28,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.15" />
+        android:layout_height="17dp"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,9 +43,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.07" />
+        android:layout_height="22dp"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"

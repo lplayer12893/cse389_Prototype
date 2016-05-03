@@ -2,18 +2,37 @@
     <string name="app_name">Anti-Virus</string>
 
     <string name="title_activity_scores">Leader Board</string>
+    <string name="title_activity_gameScreen"></string>
+    <string name="title_activity_help">Help</string>
+
     <string name="high_score_button">High Scores</string>
     <string name="retry_button">Play again</string>
     <string name="submit_button">Submit</string>
-    <string name="title_activity_gameScreen"></string>
     <string name="hint">Name</string>
     <string name="player">Player</string>
-    <string name="title_activity_help">Help</string>
-    <string name="action_about">About</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="action_about">About</string>
     <string name="url"><a href="http://www.nmt.edu/~bmoral00/389">http://www.nmt.edu/~bmoral00/389</a></string>
     <string name="developers">Developers</string>
     <string name="our_names">Joshua Garcia\nBenjamin Morales\nLucas Stuyvesant</string>
     <string name="footer">TeamMaet 2016</string>
+
+    <string name="help_objective">Objective</string>
+    <string name="help_objective_body">Stop the virus from deleting your apps.
+        You loose once all your apps have been deleted.</string>
+
+    <string name="help_one_body">When in the main menu, Tap the big\nVirus to get started.</string>
+    <string name="help_two_body">Tap on the viruses to stop them from deleting your apps.</string>
+    <string name="help_three_body">Tap to activate power-ups.</string>
+
+    <string name="help_four_title">Power-Ups</string>
+    <string name="help_four_antivirus">AntiVirus</string>
+    <string name="help_four_antivirus_body">The AntiVirus power-up
+        \nreleases agents that will help\nyou defend your apps</string>
+    <string name="help_four_destroyer">Destroyer</string>
+    <string name="help_four_destroyer_body">The Destroyer power-up
+        \ndestroys all the current viruses\non screen</string>
+    <string name="help_four_resurrection">Resurrection</string>
+    <string name="help_four_resurrection_body">The Resurrection power-up
+        \nrestores destroyed apps</string>
 </resources>

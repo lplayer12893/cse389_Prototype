@@ -7,34 +7,33 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mnet.antivirus.help_fragments$helpFragment"
+    tools:context="com.mnet.antivirus.help_fragments$helpFragmentTwo"
     android:weightSum="1">
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.32" />
+        android:layout_weight="0.35" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/help_objective"
-        android:id="@+id/help_objective"
-        android:layout_gravity="center_horizontal" />
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="71dp"
+        android:id="@+id/imageView4"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/basic_virus" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.03" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/help_objective_body"
-        android:id="@+id/help_objective_body"
+        android:text="@string/help_two_body"
+        android:id="@+id/help_two_body"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
