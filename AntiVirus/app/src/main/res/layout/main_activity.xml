@@ -15,10 +15,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/app_name"
         android:id="@+id/appTitle"
-        android:textSize="56sp"
-        android:layout_alignParentTop="true"
+        android:textSize="65sp"
+        android:layout_above="@+id/start_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp" />
+        android:paddingBottom="40dp" />
 
     <Button
         android:id="@+id/start_button"

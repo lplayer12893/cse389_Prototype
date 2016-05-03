@@ -54,7 +54,7 @@ public class DBAdapter {
 	
 	// Close the database connection.
 	public void close() {
-		myDBHelper.close();
+        myDBHelper.close();
 	}
 	
 	// Add a new set of values to be inserted into the database.
@@ -84,13 +84,22 @@ public class DBAdapter {
 		c.close();
 	}
 	
-	// Return all data in the database.
+	// Return all data in the database in Descending order by KEY_SCORE.
 	public Cursor getAllRows() {
-		String where = null;
-		Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS, where, null, null, null, null, null);
+        Cursor c = db.query(DATABASE_TABLE, ALL_KEYS, null, null, null, null, KEY_SCORE + " DESC");
 		if (c != null) {
 			c.moveToFirst();
 		}
+		return c;
+	}
+
+    // Returns the least high score and its id
+	public Cursor getMinScore() {
+		Cursor c = db.rawQuery("SELECT _id, MIN(score) from highScores", null);
+		if (c != null) {
+			c.moveToFirst();
+		}
+
 		return c;
 	}
 

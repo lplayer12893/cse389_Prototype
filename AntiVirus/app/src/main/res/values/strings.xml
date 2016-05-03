@@ -6,4 +6,14 @@
     <string name="retry_button">Play again</string>
     <string name="submit_button">Submit</string>
     <string name="title_activity_gameScreen"></string>
+    <string name="hint">Name</string>
+    <string name="player">Player</string>
+    <string name="title_activity_help">Help</string>
+    <string name="action_about">About</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="url"><a href="http://www.nmt.edu/~bmoral00/389">http://www.nmt.edu/~bmoral00/389</a></string>
+    <string name="developers">Developers</string>
+    <string name="our_names">Joshua Garcia\nBenjamin Morales\nLucas Stuyvesant</string>
+    <string name="footer">TeamMaet 2016</string>
 </resources>

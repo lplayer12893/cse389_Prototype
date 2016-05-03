@@ -22,11 +22,20 @@
         </activity>
         <activity
             android:name=".scores"
-            android:label="@string/title_activity_scores">
-        </activity>
+            android:label="@string/title_activity_scores"
+            android:parentActivityName=".main_activity"></activity>
         <activity
             android:name=".AVgame"
-            android:label="@string/title_activity_gameScreen">
+            android:label="@string/title_activity_gameScreen"
+            android:parentActivityName=".main_activity"></activity>
+        <activity
+            android:name=".Help"
+            android:label="@string/title_activity_help"
+            android:parentActivityName=".main_activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mnet.antivirus.main_activity" />
         </activity>
     </application>
 
