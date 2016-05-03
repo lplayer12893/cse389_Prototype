@@ -58,25 +58,11 @@ public class GameView extends SurfaceView {
             public void surfaceCreated(SurfaceHolder holder) {
                 /*for(int i = 0; i < 10; i++) {
                     createVirusList();
-                }
-                createLifeList();*/
-                pm = getContext().getPackageManager();
-                allApps = pm.getInstalledPackages(0);
+                }*/
 
-                if(allApps.size() < 32){    // duplicate apps until you have 32
-                    for(PackageInfo a : allApps){
-                        allApps.add(a);
-                        if(allApps.size() == 32){
-                            break;
-                        }
-                    }
-                }
 
-                Random r = new Random();
 
-                while(allApps.size() > 32){ // delete apps until you have 32
-                    allApps.remove(r.nextInt(allApps.size()));
-                }
+                createLifeList();
 
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
@@ -90,7 +76,6 @@ public class GameView extends SurfaceView {
         for(int i = 0; i < 10; i++) {
             createVirusList();
         }
-        createLifeList();
     }
 
     private void createVirusList() {
@@ -99,6 +84,24 @@ public class GameView extends SurfaceView {
 
     private void createLifeList() {
 
+        pm = getContext().getPackageManager();
+        allApps = pm.getInstalledPackages(0);
+
+        if(allApps.size() < 32){    // duplicate apps until you have 32
+            for(PackageInfo a : allApps){
+                allApps.add(a);
+                if(allApps.size() == 32){
+                    break;
+                }
+            }
+        }
+
+        Random r = new Random();
+
+        while(allApps.size() > 32){ // delete apps until you have 32
+            allApps.remove(r.nextInt(allApps.size()));
+        }
+        
         Drawable appIcon;
         appMap = null;
 
