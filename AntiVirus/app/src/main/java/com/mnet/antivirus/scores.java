@@ -25,7 +25,7 @@ public class scores extends AppCompatActivity {
     Button submit;
     Button clear;
     Button retry;
-    long score = -1; //TODO somehow update this bad boy to have the actual score after playing game
+    protected static long score = -1;//TODO fix scores bug
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +164,7 @@ public class scores extends AppCompatActivity {
     private void prePopulate() {
         int i = 0;
         String[] names = {"Benjamin", "Joshua", "Lucas", "Manuel", "Ana", "Ariel", "Christian", "Calynn", "Kyle", "Cristal"};
-        long[] scores = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000};
+        long[] scores = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
 
         for (; i < 10; i++) {
                 antiDb.insertRow(names[i], scores[i]);

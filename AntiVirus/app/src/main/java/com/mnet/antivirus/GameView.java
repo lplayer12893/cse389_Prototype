@@ -34,7 +34,6 @@ public class GameView extends SurfaceView {
     private List<PackageInfo> allApps;
     private PackageManager pm;
     private long click;
-    private int score = 0;
     private Paint paint = new Paint();
     private Handler handler = new Handler();
     protected Context ctx;
@@ -69,15 +68,7 @@ public class GameView extends SurfaceView {
             public void surfaceCreated(SurfaceHolder holder) {
 
 
-                Runnable task = new Runnable() {
-                    @Override
-                    public void run() {
-                        score = score + 1;
-                        handler.postDelayed(this, 500);
-                    }
-                };
-                handler.removeCallbacks(task);
-                handler.post(task);
+
 
 
                 createLifeList();
@@ -85,6 +76,17 @@ public class GameView extends SurfaceView {
                 if(gameLoopThread.getState() == Thread.State.NEW) {
                     gameLoopThread.setRunning(true);
                     gameLoopThread.start();
+
+                    Runnable task = new Runnable() {
+                        @Override
+                        public void run() {
+                            scores.score = scores.score + 1;
+                            handler.postDelayed(this, 500);
+                        }
+                    };
+                    handler.removeCallbacks(task);
+                    handler.post(task);
+
                 }
             }
 
@@ -145,7 +147,8 @@ public class GameView extends SurfaceView {
 
         paint.setColor(Color.argb(255, 255, 255, 255));
         paint.setTextSize(60);
-        canvas.drawText("Score: " + score, 10, 50, paint);
+        canvas.drawText("Score: " + scores.score, 10, 50, paint);
+
         for (Life l : lives) {
             l.onDraw(canvas);
         }
