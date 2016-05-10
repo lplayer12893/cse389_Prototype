@@ -30,27 +30,22 @@ public class Virus {
     private Context ctx;
     private Bitmap bmp;
     private View gameView;
-	
-	/*Virus() {
-        this(new Coordinate(0,0), null, null, null);
-	}*/
 
     Virus(GameView gameView, Context context) {
-	//Virus(Coordinate cur, Life tgt, GameView gameView, Context context) {
         this.gameView = gameView;
         this.ctx = context;
         this.radius = 75;
-		
-		/*
-		 * TODO: speed is random, radius is a constant
-		 */
-        location = new Coordinate();
-        xSpeed = 0;
-        ySpeed = 0;
-		damageRate = 1;
 
         bmp = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.basic_virus);
         scaleBitmap(bmp);
+
+        Random rnd = new Random();
+        int n = rnd.nextInt(gameView.getWidth()- bmp.getWidth());
+
+        location = new Coordinate(n, 0);
+        xSpeed = 0;
+        ySpeed = 0;
+		damageRate = 1;
     }
 	
 	/**

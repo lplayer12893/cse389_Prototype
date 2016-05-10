@@ -47,8 +47,8 @@ public class DestroyerPowerUp implements PowerUp {
      */
     @Override
     public void showIcon() {
-        image = (ImageView) activity.findViewById(R.id.power_up);
-        image.setImageResource(R.drawable.destroyer);
+       // image = (ImageView) activity.findViewById(R.id.power_up);
+       // image.setImageResource(R.drawable.destroyer);
     }
 
     /**
@@ -56,8 +56,8 @@ public class DestroyerPowerUp implements PowerUp {
      */
     @Override
     public void hideIcon() {
-        image = (ImageView) activity.findViewById(R.id.power_up);
-        image.setImageResource(R.drawable.temp);
+       //image = (ImageView) activity.findViewById(R.id.power_up);
+       // image.setImageResource(R.drawable.temp);
     }
 
 }

@@ -1,61 +1,36 @@
 package com.mnet.antivirus;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.GridView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.FrameLayout;
 
 /**
  * @author Benjamin Morales, Lucas Stuyvesent, Joshua Garcia.
  */
 public class AVgame extends Activity {
-    //List<PackageInfo> allApps;
-    //List<PackageInfo> noSystemApps;
-    //AppIconAdapter ap;
-    //PowerUp p;
+    GameView gv;
+    Bitmap bmp;
 
+    @SuppressLint("NewApi")
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(new GameView(this));
+        setContentView(R.layout.game_layout);
+        gv = (GameView) findViewById(R.id.myGameView);
+        FrameLayout app = (FrameLayout) findViewById(R.id.fl);
 
         /* gets home screen wallpaper amd sets it as background */
-        //final WallpaperManager wallpaper = WallpaperManager.getInstance(this);
-        //final Drawable wallD = wallpaper.getFastDrawable();
+        final WallpaperManager wallpaper = WallpaperManager.getInstance(this);
+        final Drawable wallD = wallpaper.getDrawable();
 
-        //app.setBackground(wallD);
-
-
-        /* sets up the view in a grid */
-        /*setContentView(R.layout.game_layout);
-        GridView appGrid = (GridView) findViewById(R.id.appGridView);
-
-
-        PackageManager pm = getPackageManager();
-        allApps = pm.getInstalledPackages(0);
-        noSystemApps = new ArrayList<>();
-
-        for(PackageInfo p : allApps) {
-            if(!isSystemPackage(p)) {
-                noSystemApps.add(p);
-            }
-        }*/
-
-        /* uses view adapter to populate grid view */
-        /*ap = new AppIconAdapter(this, noSystemApps, pm);
-        System.out.println("Number of app = " + ap.getCount());
-        appGrid.setAdapter(ap);
-
-        p = new ResurrectionPowerUp(noSystemApps, this);
-        p.showIcon();*/
+        app.setBackground(wallD);
     }
 
     @Override
@@ -78,4 +53,17 @@ public class AVgame extends Activity {
         return false;
     }
 
+    public void scaleBitmap(Bitmap btmp) {
+        int width = btmp.getWidth();
+        int height = btmp.getHeight();
+
+        //big virus scale down by 200
+        float scaleWidth = ((float) 150) / width;
+        float scaleHeight = ((float) 150) / height;
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        bmp = Bitmap.createBitmap(btmp, 0, 0, width, height, matrix, false);
+    }
 }

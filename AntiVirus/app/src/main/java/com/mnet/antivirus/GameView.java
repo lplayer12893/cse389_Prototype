@@ -1,16 +1,19 @@
 package com.mnet.antivirus;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Handler;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -37,13 +40,31 @@ public class GameView extends SurfaceView {
     private Paint paint = new Paint();
     private Handler handler = new Handler();
     protected Context ctx;
+    private Drawable back;
+    private ScaleDrawable sd;
 
-    public GameView(final Context context) {
+    public GameView(Context context) {
         super(context);
+    }
+
+    public GameView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    public GameView(Context context, AttributeSet attrs, int defstyle) {
+        super(context, attrs, defstyle);
+        init(context);
+    }
+
+    public void init(Context context) {
         ctx = context;
         viruses = new ArrayList<Virus>();
         lives = new ArrayList<Life>();
         dead = new ArrayList<Life>();
+
+        this.setZOrderOnTop(true);
+        this.getHolder().setFormat(PixelFormat.TRANSPARENT);
 
         gameLoopThread = new GameLoopThread(this);
         holder = getHolder();
@@ -62,6 +83,9 @@ public class GameView extends SurfaceView {
                     }
                 }
 
+                lives.clear();
+                viruses.clear();
+                dead.clear();
             }
 
             @Override
@@ -76,7 +100,7 @@ public class GameView extends SurfaceView {
                     }
                 };
 
-                if(gameLoopThread.getState() == Thread.State.NEW) {
+                if (gameLoopThread.getState() == Thread.State.NEW) {
                     gameLoopThread.setRunning(true);
                     gameLoopThread.start();
                     scores.score = -1;
@@ -140,8 +164,10 @@ public class GameView extends SurfaceView {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        canvas.drawColor(Color.BLACK);
-
+        //canvas.drawColor(Color.BLACK);
+        //back.setBounds(0, this.getHeight(), this.getWidth(), 0);
+        //back.draw(canvas);
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         paint.setColor(Color.argb(255, 255, 255, 255));
         paint.setTextSize(60);
         canvas.drawText("Score: " + scores.score, 10, 50, paint);
@@ -217,5 +243,11 @@ public class GameView extends SurfaceView {
             lives.removeAll(dead);
             dead.clear();
         }
+    }
+
+    public void setBackgroundDraw(Drawable back) {
+        this.back = back;
+        //sd = new ScaleDrawable(back, 0, getWidth(), getHeight());
+        back.setBounds(0, 0, getWidth(), getHeight());
     }
 }

@@ -53,8 +53,8 @@ public class ResurrectionPowerUp implements PowerUp {
      */
     @Override
     public void showIcon() {
-        image = (ImageView) activity.findViewById(R.id.power_up);
-        image.setImageResource(R.drawable.resurrection);
+       // image = (ImageView) activity.findViewById(R.id.power_up);
+        //image.setImageResource(R.drawable.resurrection);
     }
 
     /**
@@ -62,8 +62,8 @@ public class ResurrectionPowerUp implements PowerUp {
      */
     @Override
     public void hideIcon() {
-        image = (ImageView) activity.findViewById(R.id.power_up);
-        image.setImageResource(R.drawable.temp);
+       // image = (ImageView) activity.findViewById(R.id.power_up);
+       // image.setImageResource(R.drawable.temp);
     }
 
 
